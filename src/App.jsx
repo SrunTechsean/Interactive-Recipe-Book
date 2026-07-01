@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import Navbar from "./components/Navbar";
 import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import RecipeLibrary from "./pages/RecipeLibrary";
@@ -7,7 +7,7 @@ import RecipeLibrary from "./pages/RecipeLibrary";
 function App() {
   return (
     <div className="app">
-      <NavBar />
+      <Navbar />
 
       <main className="content">
         <Routes>
