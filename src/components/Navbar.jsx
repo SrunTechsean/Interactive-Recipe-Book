@@ -7,8 +7,12 @@ export default function Navbar() {
         Home
       </NavLink>
       <NavLink className="" to="/recipes">
-        Library
+        Recipes
       </NavLink>
+      <NavLink className="" to="/add">
+        Add Recipes
+      </NavLink>
+
       <NavLink className="" to="/favorites">
         Favorites
       </NavLink>
