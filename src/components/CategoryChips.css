@@ -1,0 +1,13 @@
+.isActive {
+  width: 7rem;
+  height: 2.5rem;
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+}
+
+.category__chip {
+  width: 7rem;
+  height: 2.5rem;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}

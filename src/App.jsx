@@ -4,6 +4,7 @@ import AddRecipe from "./pages/AddRecipe";
 import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import RecipeLibrary from "./pages/RecipeLibrary";
+import "./styles/App.css";
 
 function App() {
   return (
