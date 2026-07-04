@@ -1,3 +1,5 @@
+import "./AddRecipe.css";
+
 export default function AddRecipe() {
 	return (
 		<section className="min-w-3x1 mx-auto space-y-6">
