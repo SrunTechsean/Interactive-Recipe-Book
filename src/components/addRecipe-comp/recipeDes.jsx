@@ -1,6 +1,6 @@
 export default function RecipeDes() {
 	return (
-		<div>
+		<div className="mb-3">
 			<div className="space-y-2">
 				<label for="recipeTitle" className="text-sm font-semibold">
 					Recipe Title
