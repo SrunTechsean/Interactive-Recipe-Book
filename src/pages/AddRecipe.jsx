@@ -1,3 +1,6 @@
+import RecipeDes from "../components/addRecipe-comp/recipeDes";
+import RecipeTable from "../components/addRecipe-comp/recipeTable";
+import RecipeUpload from "../components/addRecipe-comp/recipeUpload";
 import "./AddRecipe.css";
 
 export default function AddRecipe() {
@@ -7,6 +10,11 @@ export default function AddRecipe() {
 			<p className="muted-foreground my-b-2">
 				Share your delicious recipe with the world
 			</p>
+			<form>
+				<RecipeDes></RecipeDes>
+				<RecipeTable></RecipeTable>
+				<RecipeUpload></RecipeUpload>
+			</form>
 		</section>
 	);
 }
