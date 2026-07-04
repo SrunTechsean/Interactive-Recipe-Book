@@ -5,3 +5,9 @@ h1 {
 .muted-foreground {
 	color: var(--color-text-muted);
 }
+
+input,
+select,
+textarea {
+	border: 1px solid #e5e7e8;
+}
