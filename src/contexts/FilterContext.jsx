@@ -1,7 +1,15 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { storage } from "../lib/storage";
 
-export const FilterContext = createContext();
+const FilterContext = createContext();
+
+export const useFilters = () => {
+  const ctx = useContext(FilterContext);
+  if (!ctx) {
+    throw new Error("useFilters must be inside FilterProvider");
+  }
+  return ctx;
+};
 
 export default function FilterProvider({ children }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,7 +31,7 @@ export default function FilterProvider({ children }) {
 
   const clearFilters = () => {
     setSelectedCategory("All");
-    setSearchQuery();
+    setSearchQuery("");
   };
 
   return (
@@ -33,6 +41,7 @@ export default function FilterProvider({ children }) {
         setSearchQuery,
         selectedCategory,
         setSelectedCategory,
+        clearFilters,
       }}
     >
       {children}
