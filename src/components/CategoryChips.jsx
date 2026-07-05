@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 import "./CategoryChips.css";
 export default function CategoryChips() {
   return (
-    <div className="category-container flex gap-2 pb-2 flex-wrap">
+    <div className="hidden category-container md:flex gap-2 pb-2 flex-wrap">
       <Button className="category__chip isActive" variant="outline">
         App
       </Button>
