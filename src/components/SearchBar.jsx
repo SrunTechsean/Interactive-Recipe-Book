@@ -5,9 +5,9 @@ import { seedRecipes } from "../data/seedData";
 import { Button } from "./ui/button";
 
 export default function SearchBar() {
-  const { query, setQuery } = useContext(FilterContext);
+  const { searchQuery, setSearchQuery } = useContext(FilterContext);
   const filteredData = seedRecipes.filter((recipe) =>
-    recipe.title.toLowerCase().includes(query.toLowerCase()),
+    recipe.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
   console.log(filteredData);
 
@@ -23,7 +23,7 @@ export default function SearchBar() {
         <input
           className="block w-full rounded-lg border border-gray-200 h-9 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 shadow-sm/5 placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           id="search"
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search Recipes..."
           type="search"
         />
