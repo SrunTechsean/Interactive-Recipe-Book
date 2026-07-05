@@ -1,4 +1,4 @@
-export default function RecipeDes() {
+export default function RecipeDes({ formData, onFieldChange }) {
 	return (
 		<div className="mb-3">
 			<div className="space-y-2">
@@ -6,7 +6,10 @@ export default function RecipeDes() {
 					Recipe Title
 				</label>
 				<input
+					id="recipeTitle"
 					type="text"
+					value={formData.title}
+					onChange={(e) => onFieldChange("title", e.target.value)}
 					placeholder="e.g. Creamy Tomato Pasta"
 					className="w-full rounded border input p-2"
 				/>
@@ -18,6 +21,8 @@ export default function RecipeDes() {
 				<textarea
 					id="description"
 					rows="3"
+					value={formData.description}
+					onChange={(e) => onFieldChange("description", e.target.value)}
 					placeholder="Briefly describe your recipe..."
 					className="w-full rounded-lg border input resize-none p-2"
 				/>
@@ -31,10 +36,16 @@ export default function RecipeDes() {
 						id="category"
 						name="category"
 						className="w-full rounded border p-2"
+						value={formData.category}
+						onChange={(e) => onFieldChange("category", e, target.value)}
 					>
 						<option disabled selected>
 							Select category
 						</option>
+						<option value="breakfast">Breakfast</option>
+						<option value="lunch">Lunch</option>
+						<option value="dinner">Dinner</option>
+						<option value="dessert">Dessert</option>
 					</select>
 				</div>
 				<div>
@@ -44,8 +55,10 @@ export default function RecipeDes() {
 					<input
 						id="servings"
 						type="number"
+						value={formData.servings}
 						placeholder="e.g. 4 or 5"
 						className="w-full rounded border p-2"
+						onChange={(e) => onFieldChange("servings", e.target.value)}
 					/>
 				</div>
 				<div>
@@ -55,8 +68,10 @@ export default function RecipeDes() {
 					<input
 						id="prepTime"
 						type="text"
+						value={formData.prepTime}
 						placeholder="e.g. 15"
 						className="w-full rounded border p-2"
+						onChange={(e) => onFieldChange("prepTime", e.target.value)}
 					/>
 				</div>
 				<div>
@@ -66,8 +81,10 @@ export default function RecipeDes() {
 					<input
 						id="cookTime"
 						type="text"
+						value={formData.cookTime}
 						placeholder="e.g. 60"
 						className="w-full rounded border p-2"
+						onChange={(e) => onFieldChange("cookTime", e.target.value)}
 					/>
 				</div>
 			</div>
