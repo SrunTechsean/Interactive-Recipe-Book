@@ -1,19 +1,19 @@
 import { Funnel, Search } from "lucide-react";
-import { useContext } from "react";
-import { FilterContext } from "../contexts/FilterContext";
+import { useFilters } from "../contexts/FilterContext";
 import { seedRecipes } from "../data/seedData";
 import { Button } from "./ui/button";
 
 export default function SearchBar() {
-  const { searchQuery, setSearchQuery } = useContext(FilterContext);
-  const filteredData = seedRecipes.filter((recipe) =>
-    recipe.title.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-  console.log(filteredData);
+  const { searchQuery, setSearchQuery } = useFilters();
 
   return (
     <div className="flex items-center gap-3">
-      <form className="relative flex-1">
+      <form
+        className="relative flex-1"
+        onSubmit={(e) => {
+          e.preventDefault;
+        }}
+      >
         <label className="sr-only" htmlFor="search">
           Search Recipes...
         </label>
@@ -26,6 +26,7 @@ export default function SearchBar() {
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search Recipes..."
           type="search"
+          value={searchQuery}
         />
       </form>
       <Button
