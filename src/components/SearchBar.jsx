@@ -1,6 +1,5 @@
 import { Funnel, Search } from "lucide-react";
 import { useFilters } from "../contexts/FilterContext";
-import { seedRecipes } from "../data/seedData";
 import { Button } from "./ui/button";
 
 export default function SearchBar() {
