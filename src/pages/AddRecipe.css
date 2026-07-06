@@ -11,3 +11,9 @@ select,
 textarea {
 	border: 1px solid #e5e7e8;
 }
+
+input:hover,
+select:hover,
+textarea:hover {
+	border: 1px solid var(--color-primary);
+}
