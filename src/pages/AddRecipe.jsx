@@ -17,6 +17,8 @@ export default function AddRecipe() {
 	const [ingredients, setIngredients] = useState([
 		{ qty: "", unit: "", name: "" },
 	]);
+	const [instructions, setInstructions] = useState("");
+	const [image, setImage] = useState(null);
 
 	const handleFieldChange = (field, value) => {
 		setFormData((prev) => ({ ...prev, [field]: value }));
@@ -42,6 +44,33 @@ export default function AddRecipe() {
 		setIngredients((prev) => prev.filter((_, i) => i !== index));
 	};
 
+	const handleSave = () => {
+		const recipe = {
+			id: Date.now().toString(),
+			title: formData.title,
+			description: formData.description,
+			ingredients: ingredients
+				.filter((ing) => ing.name.trim() !== "")
+				.map((ing) => ({
+					name: ing.name,
+					quantity: ing.qty,
+					unit: ing.unit,
+				})),
+			instructions: instructions
+				.split("\n")
+				.map((step) => step.trim())
+				.filter((step) => step !== ""),
+			prepTime: Number(formData.prepTime) || 0,
+			cookTime: Number(formData.cookTime) || 0,
+			servings: Number(formData.servings) || 0,
+			category: formData.category,
+			dietaryTags: dietaryTags.map((tag) => tag.toLowerCase()),
+			imageId: image ? image.name : null,
+			createdAt: new Date().toISOString(),
+		};
+		console.log("New recipe:", recipe);
+	};
+
 	return (
 		<section className="mx-auto space-y-6">
 			<h1 className="text-3x1 my-0 font-bold tracking-tight">Add New Recipe</h1>
@@ -58,7 +87,13 @@ export default function AddRecipe() {
 					onUpdateIngredient={updateIngredient}
 					onRemoveIngredient={removeIngredient}
 				/>
-				<RecipeUpload></RecipeUpload>
+				<RecipeUpload
+					instructions={instructions}
+					onInstructionsChange={setInstructions}
+					image={image}
+					onImageChange={setImage}
+					onSave={handleSave}
+				/>
 			</form>
 		</section>
 	);
