@@ -1,10 +1,18 @@
 import { Funnel, Search } from "lucide-react";
+import { useFilters } from "../contexts/FilterContext";
 import { Button } from "./ui/button";
 
 export default function SearchBar() {
+  const { searchQuery, setSearchQuery } = useFilters();
+
   return (
     <div className="flex items-center gap-3">
-      <form className="relative flex-1">
+      <form
+        className="relative flex-1"
+        onSubmit={(e) => {
+          e.preventDefault;
+        }}
+      >
         <label className="sr-only" htmlFor="search">
           Search Recipes...
         </label>
@@ -14,8 +22,10 @@ export default function SearchBar() {
         <input
           className="block w-full rounded-lg border border-gray-200 h-9 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 shadow-sm/5 placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           id="search"
+          onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search Recipes..."
           type="search"
+          value={searchQuery}
         />
       </form>
       <Button
