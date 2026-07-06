@@ -4,7 +4,7 @@ export default function CategoryChips() {
   return (
     <div className="hidden category-container md:flex gap-2 pb-2 flex-wrap">
       <Button className="category__chip isActive" variant="outline">
-        App
+        All
       </Button>
       <Button className="category__chip" variant="outline">
         Breakfast
