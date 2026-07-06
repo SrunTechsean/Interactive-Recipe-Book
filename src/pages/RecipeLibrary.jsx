@@ -1,5 +1,5 @@
 import CategoryChips from "../components/CategoryChips";
-import RecipeCard from "../components/RecipeCard";
+import GridForCard from "../components/GridForCard";
 import SearchBar from "../components/SearchBar";
 import { useFilters } from "../contexts/FilterContext";
 import { seedRecipes } from "../data/seedData";
@@ -17,11 +17,7 @@ export default function RecipeLibrary() {
     <section className="grid gap-3">
       <SearchBar />
       <CategoryChips />
-      <div className="grid lg:grid-cols-4 gap-6 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
-        {filteredData.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
-      </div>
+      <GridForCard data={filteredData} />
     </section>
   );
 }
