@@ -1,4 +1,5 @@
 import { Trash2 } from "lucide-react";
+import { useRecipeForm } from "../../contexts/AddRecipeContext";
 import { Button } from "../ui/button";
 
 const DIETARY_TAGS = [
@@ -10,14 +11,16 @@ const DIETARY_TAGS = [
 	"Nut-Free",
 ];
 
-export default function RecipeTable({
-	dietaryTags,
-	onToggleTag,
-	ingredients,
-	onAddIngredient,
-	onUpdateIngredient,
-	onRemoveIngredient,
-}) {
+export default function RecipeTable() {
+	const {
+		dietaryTags,
+		toggleDietaryTag,
+		ingredients,
+		addIngredient,
+		updateIngredient,
+		removeIngredient,
+	} = useRecipeForm();
+
 	return (
 		<div>
 			<div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
@@ -26,7 +29,7 @@ export default function RecipeTable({
 						key={tag}
 						type="button"
 						variant="outline"
-						onClick={() => onToggleTag(tag)}
+						onClick={() => toggleDietaryTag(tag)}
 						className={`category__chip ${dietaryTags.includes(tag) ? "isActive" : ""}`}
 					>
 						{tag}
@@ -58,7 +61,7 @@ export default function RecipeTable({
 											type="text"
 											value={ing.qty}
 											onChange={(e) =>
-												onUpdateIngredient(index, "qty", e.target.value)
+												updateIngredient(index, "qty", e.target.value)
 											}
 											placeholder="2"
 											className="w-full rounded-md border border-gray-200 px-3 py-2 text-center"
@@ -69,7 +72,7 @@ export default function RecipeTable({
 											type="text"
 											value={ing.unit}
 											onChange={(e) =>
-												onUpdateIngredient(index, "unit", e.target.value)
+												updateIngredient(index, "unit", e.target.value)
 											}
 											placeholder="cloves"
 											className="w-full rounded-md border border-gray-200 px-3 py-2 text-center"
@@ -80,7 +83,7 @@ export default function RecipeTable({
 											type="text"
 											value={ing.name}
 											onChange={(e) =>
-												onUpdateIngredient(index, "name", e.target.value)
+												updateIngredient(index, "name", e.target.value)
 											}
 											placeholder="garlic"
 											className="w-full rounded-md border border-gray-200 px-3 py-2"
@@ -89,7 +92,7 @@ export default function RecipeTable({
 									<td className="p-2 text-center border-l border-gray-100">
 										<Button
 											type="button"
-											onClick={() => onRemoveIngredient(index)}
+											onClick={() => removeIngredient(index)}
 											className="inline-flex items-center justify-center p-2 rounded-md text-red-500 hover:ring-red-500 hover:ring-3"
 										>
 											<Trash2 className="h-5 w-5" />
@@ -102,7 +105,7 @@ export default function RecipeTable({
 				</div>
 				<button
 					type="button"
-					onClick={onAddIngredient}
+					onClick={addIngredient}
 					className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-blue-400 bg-white px-4 py-2.5 text-sm font-medium text-blue-600 hover:bg-blue-50/50 transition-colors"
 				>
 					<span className="text-lg font-light">+</span> Add Ingredient

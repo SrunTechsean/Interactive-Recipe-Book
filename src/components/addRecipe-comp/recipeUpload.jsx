@@ -1,14 +1,10 @@
 import { Upload, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useRecipeForm } from "../../contexts/AddRecipeContext";
 import { Button } from "../ui/button";
 
-export default function RecipeUpload({
-	instructions,
-	onInstructionsChange,
-	image,
-	onImageChange,
-	onSave,
-}) {
+export default function RecipeUpload({ onSave }) {
+	const { instructions, setInstructions, image, setImage } = useRecipeForm();
 	const [previewUrl, setPreviewUrl] = useState(null);
 	const [isDragging, setIsDragging] = useState(false);
 
@@ -25,7 +21,7 @@ export default function RecipeUpload({
 
 	const handleFileChange = (e) => {
 		const file = e.target.files?.[0];
-		if (file) onImageChange(file);
+		if (file) setImage(file);
 	};
 
 	const handleDrop = (e) => {
@@ -33,7 +29,7 @@ export default function RecipeUpload({
 		setIsDragging(false);
 		const file = e.dataTransfer.files?.[0];
 		if (file && file.type.startsWith("image/")) {
-			onImageChange(file);
+			setImage(file);
 		}
 	};
 
@@ -49,7 +45,7 @@ export default function RecipeUpload({
 	const handleRemoveImage = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
-		onImageChange(null);
+		setImage(null);
 	};
 
 	return (
@@ -65,7 +61,7 @@ export default function RecipeUpload({
 						placeholder="Enter each step on a new line"
 						className="w-full rounded-md border border-gray-200 px-4 py-3 resize-none"
 						value={instructions}
-						onChange={(e) => onInstructionsChange(e.target.value)}
+						onChange={(e) => setInstructions(e.target.value)}
 					></textarea>
 				</div>
 				<div>
