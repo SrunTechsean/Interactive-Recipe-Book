@@ -37,7 +37,7 @@ export default function RecipeDes({ formData, onFieldChange }) {
 						name="category"
 						className="w-full rounded border p-2"
 						value={formData.category}
-						onChange={(e) => onFieldChange("category", e, target.value)}
+						onChange={(e) => onFieldChange("category", e.target.value)}
 					>
 						<option disabled selected>
 							Select category
