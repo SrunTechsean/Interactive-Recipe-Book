@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { saveImage } from "../lib/db";
 
 const RecipeFormContext = createContext(null);
 
@@ -44,6 +45,15 @@ export function RecipeFormProvider({ children }) {
 
 	const saveRecipe = async () => {
 		const id = Date.now().toString();
+
+		if (image) {
+			try {
+				await saveImage(id, image);
+				console.log("Image saved to IndexedDB with id:", id);
+			} catch (err) {
+				console.error("Failed to save image:", err);
+			}
+		}
 
 		const recipe = {
 			id,
