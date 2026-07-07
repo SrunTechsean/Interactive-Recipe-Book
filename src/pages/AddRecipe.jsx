@@ -9,13 +9,20 @@ import {
 import "./AddRecipe.css";
 
 function AddRecipeForm() {
-	const { saveRecipe } = useRecipeForm();
+	const { saveRecipe, validate } = useRecipeForm();
 	const navigate = useNavigate();
 
 	const handleSave = async () => {
-		const recipe = await saveRecipe();
-		console.log("Saved recipe:", recipe);
-		navigate("/recipes");
+		const isValid = validate();
+		if (!isValid) return;
+
+		try {
+			const recipe = await saveRecipe();
+			console.log("Saved recipe:", recipe);
+			navigate("/recipes");
+		} catch (err) {
+			console.error("Failed to save recipe:", err);
+		}
 	};
 
 	return (

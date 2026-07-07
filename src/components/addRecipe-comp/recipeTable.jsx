@@ -19,6 +19,7 @@ export default function RecipeTable() {
 		addIngredient,
 		updateIngredient,
 		removeIngredient,
+		errors,
 	} = useRecipeForm();
 
 	return (
@@ -37,7 +38,7 @@ export default function RecipeTable() {
 				))}
 			</div>
 			<div className="mx-0 p-0">
-				<label for="ingredients" className="text-sm font-semibold">
+				<label htmlFor="ingredients" className="text-sm font-semibold">
 					Ingredients
 				</label>
 				<div
@@ -102,6 +103,9 @@ export default function RecipeTable() {
 							))}
 						</tbody>
 					</table>
+					{errors.ingredients && (
+						<p className="text-red-500 text-xs mt-2">{errors.ingredients}</p>
+					)}
 				</div>
 				<button
 					type="button"

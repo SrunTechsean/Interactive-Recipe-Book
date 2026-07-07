@@ -19,6 +19,7 @@ export function RecipeFormProvider({ children }) {
 	]);
 	const [instructions, setInstructions] = useState("");
 	const [image, setImage] = useState(null);
+	const [errors, setErrors] = useState({});
 
 	const handleFieldChange = (field, value) => {
 		setFormData((prev) => ({ ...prev, [field]: value }));
@@ -42,6 +43,40 @@ export function RecipeFormProvider({ children }) {
 
 	const removeIngredient = (index) => {
 		setIngredients((prev) => prev.filter((_, i) => i !== index));
+	};
+
+	const validate = () => {
+		const newErrors = {};
+
+		if (!formData.title.trim()) {
+			newErrors.title = "Recipe title is required";
+		}
+		if (!formData.category) {
+			newErrors.category = "Category is required";
+		}
+		if (!formData.servings) {
+			newErrors.servings = "Servings is required";
+		}
+		if (!formData.prepTime) {
+			newErrors.prepTime = "Prep time is required";
+		}
+		if (!formData.cookTime) {
+			newErrors.cookTime = "Cook time is required";
+		}
+
+		const hasValidIngredient = ingredients.some(
+			(ing) => ing.name.trim() && ing.qty.trim() && ing.unit.trim(),
+		);
+		if (!hasValidIngredient) {
+			newErrors.ingredients = "At least one complete ingredient is required";
+		}
+
+		if (!instructions.trim()) {
+			newErrors.instructions = "Instructions are required";
+		}
+
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
 	};
 
 	const saveRecipe = async () => {
@@ -98,6 +133,8 @@ export function RecipeFormProvider({ children }) {
 		setInstructions,
 		image,
 		setImage,
+		errors,
+		validate,
 		saveRecipe,
 	};
 

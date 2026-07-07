@@ -4,7 +4,8 @@ import { useRecipeForm } from "../../contexts/AddRecipeContext";
 import { Button } from "../ui/button";
 
 export default function RecipeUpload({ onSave }) {
-	const { instructions, setInstructions, image, setImage } = useRecipeForm();
+	const { instructions, setInstructions, image, setImage, errors } =
+		useRecipeForm();
 	const [previewUrl, setPreviewUrl] = useState(null);
 	const [isDragging, setIsDragging] = useState(false);
 
@@ -52,7 +53,7 @@ export default function RecipeUpload({ onSave }) {
 		<div>
 			<div className="mx-auto p-0 space-y-6 text-sm">
 				<div>
-					<label for="instructions" className="text-sm font-semibold">
+					<label htmlFor="instructions" className="text-sm font-semibold">
 						Instructions
 					</label>
 					<textarea
@@ -63,6 +64,9 @@ export default function RecipeUpload({ onSave }) {
 						value={instructions}
 						onChange={(e) => setInstructions(e.target.value)}
 					></textarea>
+					{errors.instructions && (
+						<p className="text-red-500 text-xs mt-1">{errors.instructions}</p>
+					)}
 				</div>
 				<div>
 					<label htmlFor="upload" className="text-sm font-semibold">

@@ -1,13 +1,13 @@
 import { useRecipeForm } from "../../contexts/AddRecipeContext";
 
 export default function RecipeDes() {
-	const { formData, handleFieldChange } = useRecipeForm();
+	const { formData, handleFieldChange, errors } = useRecipeForm();
 
 	return (
 		<div className="mb-3">
 			<div className="space-y-2">
-				<label for="recipeTitle" className="text-sm font-semibold">
-					Recipe Title
+				<label htmlFor="recipeTitle" className="text-sm font-semibold">
+					Recipe Title *
 				</label>
 				<input
 					id="recipeTitle"
@@ -17,9 +17,12 @@ export default function RecipeDes() {
 					placeholder="e.g. Creamy Tomato Pasta"
 					className="w-full rounded border input p-2"
 				/>
+				{errors.title && (
+					<p className="text-red-500 text-xs mt-1">{errors.title}</p>
+				)}
 			</div>
 			<div>
-				<label for="description" className="text-sm font-semibold">
+				<label htmlFor="description" className="text-sm font-semibold">
 					Description
 				</label>
 				<textarea
@@ -30,11 +33,14 @@ export default function RecipeDes() {
 					placeholder="Briefly describe your recipe..."
 					className="w-full rounded-lg border input resize-none p-2"
 				/>
+				{errors.description && (
+					<p className="text-red-500 text-xs mt-1">{errors.description}</p>
+				)}
 			</div>
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+			<div className="grid grid-cols-2 -4">
 				<div className="grid space-y-2">
-					<label for="category" className="text-sm m-0 font-semibold">
-						Category
+					<label htmlFor="category" className="text-sm m-0 font-semibold">
+						Category *
 					</label>
 					<select
 						id="category"
@@ -43,18 +49,18 @@ export default function RecipeDes() {
 						value={formData.category}
 						onChange={(e) => handleFieldChange("category", e.target.value)}
 					>
-						<option disabled selected>
-							Select category
-						</option>
 						<option value="breakfast">Breakfast</option>
 						<option value="lunch">Lunch</option>
 						<option value="dinner">Dinner</option>
 						<option value="dessert">Dessert</option>
 					</select>
+					{errors.category && (
+						<p className="text-red-500 text-xs mt-1">{errors.category}</p>
+					)}
 				</div>
 				<div>
-					<label for="servings" className="grid text-sm font-semibold">
-						Servings
+					<label htmlFor="servings" className="grid text-sm font-semibold">
+						Servings *
 					</label>
 					<input
 						id="servings"
@@ -64,10 +70,13 @@ export default function RecipeDes() {
 						className="w-full rounded border p-2"
 						onChange={(e) => handleFieldChange("servings", e.target.value)}
 					/>
+					{errors.servings && (
+						<p className="text-red-500 text-xs mt-1">{errors.servings}</p>
+					)}
 				</div>
 				<div>
-					<label for="prepTime" className="grid text-sm font-semibold">
-						Prep Time (min)
+					<label htmlFor="prepTime" className="grid text-sm font-semibold">
+						Prep Time (min) *
 					</label>
 					<input
 						id="prepTime"
@@ -77,10 +86,13 @@ export default function RecipeDes() {
 						className="w-full rounded border p-2"
 						onChange={(e) => handleFieldChange("prepTime", e.target.value)}
 					/>
+					{errors.prepTime && (
+						<p className="text-red-500 text-xs mt-1">{errors.prepTime}</p>
+					)}
 				</div>
 				<div>
-					<label for="cookTime" className="grid text-sm font-semibold">
-						Cook Time (min)
+					<label htmlFor="cookTime" className="grid text-sm font-semibold">
+						Cook Time (min) *
 					</label>
 					<input
 						id="cookTime"
@@ -90,6 +102,9 @@ export default function RecipeDes() {
 						className="w-full rounded border p-2"
 						onChange={(e) => handleFieldChange("cookTime", e.target.value)}
 					/>
+					{errors.cookTime && (
+						<p className="text-red-500 text-xs mt-1">{errors.cookTime}</p>
+					)}
 				</div>
 			</div>
 		</div>
