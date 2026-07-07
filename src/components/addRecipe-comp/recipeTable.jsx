@@ -39,7 +39,7 @@ export default function RecipeTable() {
 			</div>
 			<div className="mx-0 p-0">
 				<label htmlFor="ingredients" className="text-sm font-semibold">
-					Ingredients *
+					Ingredients <span className="text-red-500">*</span>
 				</label>
 				<div
 					id="ingredients"
@@ -90,11 +90,11 @@ export default function RecipeTable() {
 											className="w-full rounded-md border border-gray-200 px-3 py-2"
 										/>
 									</td>
-									<td className="p-2 text-center border-l border-gray-100">
+									<td className="p-1 text-center border-l border-gray-100">
 										<Button
 											type="button"
 											onClick={() => removeIngredient(index)}
-											className="inline-flex items-center justify-center p-2 rounded-md text-red-500 hover:ring-red-500 hover:ring-3"
+											className="inline-flex items-center justify-center p-1 rounded-md text-red-500 hover:ring-red-500 hover:ring-3"
 										>
 											<Trash2 className="h-5 w-5" />
 										</Button>
@@ -104,7 +104,9 @@ export default function RecipeTable() {
 						</tbody>
 					</table>
 					{errors.ingredients && (
-						<p className="text-red-500 text-xs mt-2">{errors.ingredients}</p>
+						<p className="p-2 text-red-500 text-xs mt-2">
+							{errors.ingredients}
+						</p>
 					)}
 				</div>
 				<button

@@ -7,7 +7,7 @@ export default function RecipeDes() {
 		<div className="mb-3">
 			<div className="space-y-2">
 				<label htmlFor="recipeTitle" className="text-sm font-semibold">
-					Recipe Title *
+					Recipe Title <span className="text-red-500">*</span>
 				</label>
 				<input
 					id="recipeTitle"
@@ -40,7 +40,7 @@ export default function RecipeDes() {
 			<div className="grid grid-cols-2 gap-4">
 				<div className="grid">
 					<label htmlFor="category" className="text-sm m-0 font-semibold">
-						Category *
+						Category <span className="text-red-500">*</span>
 					</label>
 					<select
 						id="category"
@@ -62,8 +62,8 @@ export default function RecipeDes() {
 					)}
 				</div>
 				<div className="grid">
-					<label htmlFor="servings" className="grid text-sm font-semibold">
-						Servings *
+					<label htmlFor="servings" className="text-sm font-semibold">
+						Servings <span className="text-red-500">*</span>
 					</label>
 					<input
 						id="servings"
@@ -78,8 +78,8 @@ export default function RecipeDes() {
 					)}
 				</div>
 				<div className="grid">
-					<label htmlFor="prepTime" className="grid text-sm font-semibold">
-						Prep Time (min) *
+					<label htmlFor="prepTime" className="text-sm font-semibold">
+						Prep Time (min) <span className="text-red-500">*</span>
 					</label>
 					<input
 						id="prepTime"
@@ -94,8 +94,8 @@ export default function RecipeDes() {
 					)}
 				</div>
 				<div className="grid">
-					<label htmlFor="cookTime" className="grid text-sm font-semibold">
-						Cook Time (min) *
+					<label htmlFor="cookTime" className="text-sm font-semibold">
+						Cook Time (min) <span className="text-red-500">*</span>
 					</label>
 					<input
 						id="cookTime"

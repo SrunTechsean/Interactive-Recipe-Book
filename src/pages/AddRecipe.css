@@ -5,7 +5,7 @@ h1 {
 input,
 select,
 textarea {
-	border: 1px solid #e5e7e8;
+	border: 1px solid var(--color-border);
 }
 
 input:hover,
