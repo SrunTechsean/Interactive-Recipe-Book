@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { saveImage } from "../lib/imageDB";
+import { storage } from "../lib/storage";
 
 const RecipeFormContext = createContext(null);
 
@@ -79,9 +80,8 @@ export function RecipeFormProvider({ children }) {
 			createdAt: new Date().toISOString(),
 		};
 
-		const existing = JSON.parse(localStorage.getItem("recipes") || "[]");
-		localStorage.setItem("recipes", JSON.stringify([...existing, recipe]));
-
+		const existing = storage.getRecipes() ?? [];
+		storage.setRecipes([...existing, recipe]);
 		return recipe;
 	};
 
