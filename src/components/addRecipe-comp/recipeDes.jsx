@@ -31,7 +31,7 @@ export default function RecipeDes() {
 					className="w-full rounded-lg border input resize-none p-2"
 				/>
 			</div>
-			<div className="grid grid-cols-2 gap-4">
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<div className="grid space-y-2">
 					<label for="category" className="text-sm m-0 font-semibold">
 						Category

@@ -2,10 +2,6 @@ h1 {
 	font-size: revert;
 }
 
-.muted-foreground {
-	color: var(--color-text-muted);
-}
-
 input,
 select,
 textarea {

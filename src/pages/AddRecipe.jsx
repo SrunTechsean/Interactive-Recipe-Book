@@ -16,9 +16,9 @@ function AddRecipeForm() {
 	};
 
 	return (
-		<section className="min-w-3xl mx-auto space-y-6">
+		<section className="w-full max-w-3xl mx-auto px-4 space-y-6">
 			<h1 className="text-3xl my-0 font-bold tracking-tight">Add New Recipe</h1>
-			<p className="text-muted-foreground mb-2">
+			<p className="text-brand-text-muted mb-2">
 				Share your delicious recipe with the world
 			</p>
 			<form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
