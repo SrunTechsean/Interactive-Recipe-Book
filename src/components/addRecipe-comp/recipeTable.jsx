@@ -39,7 +39,7 @@ export default function RecipeTable() {
 			</div>
 			<div className="mx-0 p-0">
 				<label htmlFor="ingredients" className="text-sm font-semibold">
-					Ingredients
+					Ingredients *
 				</label>
 				<div
 					id="ingredients"

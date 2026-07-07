@@ -54,7 +54,7 @@ export default function RecipeUpload({ onSave }) {
 			<div className="mx-auto p-0 space-y-6 text-sm">
 				<div>
 					<label htmlFor="instructions" className="text-sm font-semibold">
-						Instructions
+						Instructions *
 					</label>
 					<textarea
 						id="instructions"

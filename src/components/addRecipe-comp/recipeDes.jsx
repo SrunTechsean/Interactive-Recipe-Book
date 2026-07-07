@@ -49,6 +49,9 @@ export default function RecipeDes() {
 						value={formData.category}
 						onChange={(e) => handleFieldChange("category", e.target.value)}
 					>
+						<option value="" disabled>
+							Select category
+						</option>
 						<option value="breakfast">Breakfast</option>
 						<option value="lunch">Lunch</option>
 						<option value="dinner">Dinner</option>
