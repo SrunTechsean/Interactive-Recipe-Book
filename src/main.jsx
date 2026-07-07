@@ -5,12 +5,15 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./styles/tokens.css";
 import FilterProvider from "./contexts/FilterContext";
+import { FavoritesProvider } from "./contexts/FavoritesContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <FilterProvider>
-        <App />
+        <FavoritesProvider>
+          <App />
+        </FavoritesProvider>
       </FilterProvider>
     </BrowserRouter>
   </StrictMode>,
