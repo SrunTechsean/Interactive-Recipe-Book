@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { saveImage } from "../lib/db";
+import { saveImage } from "../lib/imageDB";
 
 const RecipeFormContext = createContext(null);
 
