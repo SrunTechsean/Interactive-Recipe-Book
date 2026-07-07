@@ -6,12 +6,12 @@ const FavoritesContext = createContext();
 export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState([]);
  
-  // Hydration: load saved favorites on mount
+  // Hydration
   useEffect(() => {
     setFavorites(storage.getFavorites());
   }, []);
  
-  // Persistence: save whenever favorites changes
+  // Persistence
   useEffect(() => {
     storage.setFavorites(favorites);
   }, [favorites]);
