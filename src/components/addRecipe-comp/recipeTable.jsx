@@ -43,7 +43,7 @@ export default function RecipeTable() {
 				</label>
 				<div
 					id="ingredients"
-					className="border border-gray-200 rounded-lg overflow-hidden bg-white"
+					className="border border-gray-200 rounded-lg overflow-hidden bg-white mt-3 mb-2"
 				>
 					<table className="w-full rounded-lg border-collapse text-center text-sm text-gray-700">
 						<thead>

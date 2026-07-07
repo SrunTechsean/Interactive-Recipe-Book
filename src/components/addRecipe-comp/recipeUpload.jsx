@@ -60,7 +60,7 @@ export default function RecipeUpload({ onSave }) {
 						id="instructions"
 						rows={3}
 						placeholder="Enter each step on a new line"
-						className="w-full rounded-md border border-gray-200 px-4 py-3 resize-none"
+						className="w-full rounded-md border border-gray-200 px-4 py-3 resize-none mt-3 mb-2"
 						value={instructions}
 						onChange={(e) => setInstructions(e.target.value)}
 					></textarea>
@@ -94,7 +94,7 @@ export default function RecipeUpload({ onSave }) {
 							onDrop={handleDrop}
 							onDragOver={handleDragOver}
 							onDragLeave={handleDragLeave}
-							className={`flex flex-col items-center justify-center border border-dashed rounded-lg bg-white p-8 text-center cursor-pointer transition-colors ${
+							className={`flex flex-col items-center justify-center border border-dashed rounded-lg bg-white p-8 mt-3 mb-2 text-center cursor-pointer transition-colors ${
 								isDragging
 									? "border-blue-400 bg-blue-50/50"
 									: "border-gray-300 hover:border-gray-400"
