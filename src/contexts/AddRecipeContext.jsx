@@ -79,6 +79,22 @@ export function RecipeFormProvider({ children }) {
 		return Object.keys(newErrors).length === 0;
 	};
 
+	const resetForm = () => {
+		setFormData({
+			title: "",
+			description: "",
+			category: "",
+			servings: "",
+			prepTime: "",
+			cookTime: "",
+		});
+		setDietaryTags([]);
+		setIngredients([{ qty: "", unit: "", name: "" }]);
+		setInstructions("");
+		setImage(null);
+		setErrors({});
+	};
+
 	const saveRecipe = async () => {
 		const id = Date.now().toString();
 
@@ -136,6 +152,7 @@ export function RecipeFormProvider({ children }) {
 		errors,
 		validate,
 		saveRecipe,
+		resetForm,
 	};
 
 	return (
