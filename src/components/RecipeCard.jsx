@@ -2,9 +2,16 @@ import { Clock, Flame, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "../components/ui/badge";
 import { Card, CardContent } from "../components/ui/card";
+import { useFavorites } from "../contexts/FavoritesContext";
 
 export default function RecipeCard({ recipe }) {
   const totalTime = recipe.prepTime + recipe.cookTime;
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const handleFavoriteClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorite(recipe.id);
+  };
 
   return (
     <Link className="block group" to={`/recipes/${recipe.id}`}>
@@ -45,9 +52,9 @@ export default function RecipeCard({ recipe }) {
               <Flame size={16} />
               <span>Easy</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Heart size={16} />
-              <span>0</span>
+            <div className="flex items-center gap-1.5 hover:text-destructive" onClick={handleFavoriteClick}>
+              <Heart size={16} className={isFavorite(recipe.id) ? "fill-destructive text-destructive" : ""} />
+              <span>{isFavorite(recipe.id) ? 1 : 0}</span>
             </div>
           </div>
         </CardContent>
