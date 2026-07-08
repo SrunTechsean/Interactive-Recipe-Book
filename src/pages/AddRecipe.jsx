@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SaveConfirmModal from "../components/addRecipe-comp/confirmModal";
 import RecipeDes from "../components/addRecipe-comp/recipeDes";
 import RecipeTable from "../components/addRecipe-comp/recipeTable";
 import RecipeUpload from "../components/addRecipe-comp/recipeUpload";
@@ -9,7 +11,8 @@ import {
 import "./AddRecipe.css";
 
 function AddRecipeForm() {
-	const { saveRecipe, validate } = useRecipeForm();
+	const { saveRecipe, validate, resetForm } = useRecipeForm();
+	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
 
 	const handleSave = async () => {
@@ -19,10 +22,20 @@ function AddRecipeForm() {
 		try {
 			const recipe = await saveRecipe();
 			console.log("Saved recipe:", recipe);
-			navigate("/recipes");
+			setShowModal(true);
 		} catch (err) {
 			console.error("Failed to save recipe:", err);
 		}
+	};
+
+	const handleAddAnother = () => {
+		resetForm();
+		setShowModal(false);
+	};
+
+	const handleGoToRecipes = () => {
+		setShowModal(false);
+		navigate("/recipes");
 	};
 
 	return (
@@ -39,6 +52,12 @@ function AddRecipeForm() {
 					<RecipeTable />
 					<RecipeUpload onSave={handleSave} />
 				</form>
+				{showModal && (
+					<SaveConfirmModal
+						onAddAnother={handleAddAnother}
+						onGoToRecipes={handleGoToRecipes}
+					/>
+				)}
 			</div>
 		</section>
 	);
