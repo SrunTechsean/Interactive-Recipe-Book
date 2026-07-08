@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getImage } from "./db";
+import { getImage } from "../lib/imageDB";
 
 export default function RecipeImage({ imageId, alt, className }) {
 	const [imageUrl, setImageUrl] = useState(null);
