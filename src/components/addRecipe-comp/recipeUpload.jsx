@@ -29,7 +29,7 @@ export default function RecipeUpload({ onSave }) {
 		e.preventDefault();
 		setIsDragging(false);
 		const file = e.dataTransfer.files?.[0];
-		if (file && file.type.startsWith("image/")) {
+		if (file?.type.startsWith("image/")) {
 			setImage(file);
 		}
 	};
@@ -73,47 +73,54 @@ export default function RecipeUpload({ onSave }) {
 						Photo
 					</label>
 
-					{previewUrl ? (
-						<div className="relative border border-gray-300 rounded-lg overflow-hidden">
-							<img
-								src={previewUrl}
-								alt="Recipe preview"
-								className="w-full h-auto max-h-96 object-contain"
-							/>
-							<button
-								type="button"
-								onClick={handleRemoveImage}
-								className="absolute top-2 right-2 bg-white/90 hover:bg-white rounded-full p-1.5 shadow-sm"
+					<div
+						onDrop={handleDrop}
+						onDragOver={handleDragOver}
+						onDragLeave={handleDragLeave}
+					>
+						{previewUrl ? (
+							<div
+								className={`relative border rounded-lg overflow-hidden transition-colors ${
+									isDragging ? "border-blue-400" : "border-gray-300"
+								}`}
 							>
-								<X className="h-4 w-4 text-gray-700" />
-							</button>
-						</div>
-					) : (
-						<label
-							htmlFor="upload"
-							onDrop={handleDrop}
-							onDragOver={handleDragOver}
-							onDragLeave={handleDragLeave}
-							className={`flex flex-col items-center justify-center border border-dashed rounded-lg bg-white p-8 mt-3 mb-2 text-center cursor-pointer transition-colors ${
-								isDragging
-									? "border-blue-400 bg-blue-50/50"
-									: "border-gray-300 hover:border-gray-400"
-							}`}
-						>
-							<Upload className="text-gray-500" />
-							<p className="text-gray-500 font-medium">
-								Drag photo here or click to upload
-							</p>
-							<p className="text-xs text-gray-400 mt-1">Max 2MB</p>
-							<input
-								id="upload"
-								type="file"
-								accept="image/*"
-								onChange={handleFileChange}
-								className="hidden"
-							/>
-						</label>
-					)}
+								<img
+									src={previewUrl}
+									alt="Recipe preview"
+									className="w-full h-auto max-h-96 object-contain"
+								/>
+								<button
+									type="button"
+									onClick={handleRemoveImage}
+									className="absolute top-2 right-2 bg-white/90 hover:bg-white rounded-full p-1.5 shadow-sm"
+								>
+									<X className="h-4 w-4 text-gray-700" />
+								</button>
+							</div>
+						) : (
+							<label
+								htmlFor="upload"
+								className={`flex flex-col items-center justify-center border border-dashed rounded-lg bg-white p-8 mt-3 mb-2 text-center cursor-pointer transition-colors ${
+									isDragging
+										? "border-blue-400 bg-blue-50/50"
+										: "border-gray-300 hover:border-gray-400"
+								}`}
+							>
+								<Upload className="text-gray-500" />
+								<p className="text-gray-500 font-medium">
+									Drag photo here or click to upload
+								</p>
+								<p className="text-xs text-gray-400 mt-1">Max 2MB</p>
+								<input
+									id="upload"
+									type="file"
+									accept="image/*"
+									onChange={handleFileChange}
+									className="hidden"
+								/>
+							</label>
+						)}
+					</div>
 				</div>
 			</div>
 			<div className="flex justify-between items-center pt-4">
