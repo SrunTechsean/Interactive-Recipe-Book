@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ChefHat, Clock, Heart, Share2, Users } from "lucide-react";
+import { ChefHat, Clock, Heart, Share2, Users, ArrowLeft } from "lucide-react";
 import { Button } from "../components/ui/button";
 import RecipeImage from "../components/RecipeImage";
 import { useFavorites } from "../contexts/FavoritesContext";
@@ -34,6 +34,10 @@ export default function RecipeDetail() {
 
   return (
     <div className="recipe-detail">
+      <button className = "recipe-back-btn" onClick={() => navigate(-1)}>
+        <ArrowLeft size={16}/>
+        Back
+      </button>
       <div className="recipe-breadcrumb">
         <Link to="/recipes">Library</Link>
         <span>›</span>
