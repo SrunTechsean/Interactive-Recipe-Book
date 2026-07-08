@@ -31,9 +31,8 @@ export default function Favorites() {
   return (
     <section className="grid gap-3">
       <div className="flex items-center gap-3">
-        <Heart className="h-6 w-6 fill-destructive text-destructive" />
+        {/* <Heart className="h-6 w-6 fill-destructive text-destructive" /> */}
         <h1 className="text-2xl font-bold">Your Favorites</h1>
-        <Badge variant="secondary">{favoriteRecipes.length}</Badge>
       </div>
  
       <GridForCard data={favoriteRecipes} />
