@@ -1,18 +1,17 @@
-import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
-import { useFavorites } from "../contexts/FavoritesContext";
-import { seedRecipes } from "../data/seedData";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import GridForCard from "../components/GridForCard";
+import { Button } from "../components/ui/button";
+import { useFavorites } from "../contexts/FavoritesContext";
+import { storage } from "../lib/storage";
 
 export default function Favorites() {
   const { favorites } = useFavorites();
- 
-  const favoriteRecipes = seedRecipes.filter((recipe) =>
-    favorites.includes(recipe.id)
-  );
- 
+
+  const favoriteRecipes = storage
+    .getRecipes()
+    .filter((recipe) => favorites.includes(recipe.id));
+
   if (favoriteRecipes.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -27,14 +26,14 @@ export default function Favorites() {
       </div>
     );
   }
- 
+
   return (
     <section className="grid gap-3">
       <div className="flex items-center gap-3">
         {/* <Heart className="h-6 w-6 fill-destructive text-destructive" /> */}
         <h1 className="text-2xl font-bold">Your Favorites</h1>
       </div>
- 
+
       <GridForCard data={favoriteRecipes} />
     </section>
   );
