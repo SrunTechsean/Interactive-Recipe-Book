@@ -38,7 +38,7 @@ export default function RecipeDetail() {
         <ArrowLeft size={16}/>
         Back
       </button>
-      <p className = "recipe-page-tittle">Recipe Detail</p>
+      <h1 className = "recipe-page-tittle"><b>Recipe Detail</b></h1>
       <div className="recipe-breadcrumb">
         <Link to="/recipes">Library</Link>
         <span>›</span>

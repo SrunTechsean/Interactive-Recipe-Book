@@ -3,12 +3,10 @@
   margin: 0 auto;
   padding: 2rem 1.5rem 6rem;
 }
-
 .recipe-notfound {
   padding: 6rem 0;
   text-align: center;
 }
-
 .recipe-notfound button {
   margin-top: 1rem;
 }
