@@ -4,6 +4,7 @@ import AddRecipe from "./pages/AddRecipe";
 import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import RecipeLibrary from "./pages/RecipeLibrary";
+import RecipeDetail from "./pages/RecipeDetail";
 import "./styles/App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route element={<Favorites />} path="/favorites" />
           <Route element={<AddRecipe />} path="/add" />
           <Route element={<RecipeLibrary />} path="/recipes" />
+          <Route path="/recipes/:id" element={<RecipeDetail />} />
         </Routes>
       </main>
     </div>

@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Book, Plus, Heart, Search, User, ChevronDown } from "lucide-react";
+import { Home, Book, Plus, Heart, Search, User, ChevronDown, Menu, X } from "lucide-react";
 
 const linkClass = ({ isActive }) =>
   `flex items-center gap-2 font-medium pb-1 border-b-2 whitespace-nowrap ${
@@ -8,7 +9,18 @@ const linkClass = ({ isActive }) =>
       : "text-gray-600 border-transparent hover:text-red-600"
   }`;
 
+// This is for minimize the screen
+const navItems = [
+  { title: "Home", path: "/" },
+  { title: "Recipes", path: "/recipes" },
+  { title: "Add Recipe", path: "/add" },
+  { title: "Favorites", path: "/favorites" },
+  { title: "Search", path: "/search" },
+  { title: "Sign In", path: "/signin" },
+];
+
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav className="flex flex-col items-center gap-3 border-b bg-background px-6 py-3 sm:flex-row sm:justify-between sm:overflow-x-auto">
       <div className="flex items-center gap-2 shrink-0">
