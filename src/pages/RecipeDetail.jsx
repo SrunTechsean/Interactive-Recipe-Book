@@ -38,10 +38,13 @@ export default function RecipeDetail() {
         <ArrowLeft size={16}/>
         Back
       </button>
+      <p className = "recipe-page-tittle">Recipe Detail</p>
       <div className="recipe-breadcrumb">
         <Link to="/recipes">Library</Link>
         <span>›</span>
-        <span>{recipe.category}</span>
+        <Link to {...`/recipes?category=${encodeURIComponent(recipe.category)}`}>
+        {recipe.category}
+        </Link>
         <span>›</span>
         <span className="recipe-breadcrumb-current">{recipe.title}</span>
       </div>
