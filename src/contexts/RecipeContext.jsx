@@ -19,10 +19,11 @@ export function RecipeProvider({ children }) {
         }, [recipes, hydrated]);
   
     const getRecipeById = (id) => recipes.find((r) => String(r.id) === String(id));
+    const deleteRecipe = (id) => {setRecipes((prev) => prev.filter((r) => String(r.id) !== String(id))); };
 
   return (
     <RecipeContext.Provider
-      value={{ recipes, getRecipeById }}
+      value={{ recipes, getRecipeById, deleteRecipe }}
     >
       {children}
     </RecipeContext.Provider>

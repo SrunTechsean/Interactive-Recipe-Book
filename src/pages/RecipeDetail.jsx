@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Clock, Heart, Share2, Users, ArrowLeft, Check, X, Copy } from "lucide-react";
+import { Clock, Heart, Share2, Users, ArrowLeft, Check, X, Copy, Trash2 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import RecipeImage from "../components/RecipeImage";
 import { useFavorites } from "../contexts/FavoritesContext";
@@ -21,6 +21,7 @@ export default function RecipeDetail() {
   const { getRecipeById } = useRecipes();
   const [showShare, setShowShare] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   
 
   const recipe = getRecipeById(id);
@@ -30,6 +31,12 @@ export default function RecipeDetail() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const confirmDelete = () => {
+  deleteRecipe(recipe.id);
+  navigate("/recipes");
+  };
+  
 
   if (!recipe) {
     return (
@@ -79,26 +86,11 @@ export default function RecipeDetail() {
                 Share
               </Button>
 
-              {showShare && (
-                <div className="share-popover">
-                  <div className="share-popover-header">
-                    <p className="share-popover-title">Share</p>
-                    <button className="share-popover-close" onClick={() => setShowShare(false)}>
-                      <X size={16} />
-                    </button>
-                  </div>
-
-                <div className="share-popover-row">
-                  <input className="share-popover-input" readOnly value={window.location.href} onClick={(e) => e.target.select()} />
-
-                  <button className={`share-copy-btn ${copied ? "copied" : ""}`} onClick={handleCopyLink}>
-                    {copied ? <Check size={14} /> : <Copy size={14} />}
-                    {copied ? "Copied" : "Copy"}
-                  </button>
-                </div>
-              </div>  
-              )}
             </div>
+            {/* Delete button */}
+            <button className="delete-btn" onClick={() => setShowDeleteConfirm(true)}>
+              <Trash2 size={16} />
+            </button>
           </div>
         </div>
 
@@ -144,6 +136,51 @@ export default function RecipeDetail() {
           </ol>
         </div>
       </div>
+      {showShare && (
+        <div className="share-overlay" onClick={() => setShowShare(false)}>
+          <div className="share-popover" onClick={(e) => e.stopPropagation()}>
+            <div className="share-popover-header">
+              <p className="share-popover-title">Share this recipe</p>
+              <button className="share-popover-close" onClick={() => setShowShare(false)}>
+                <X size={16} />
+              </button>
+            </div>
+
+            <div className="share-popover-row">
+              <input
+                className="share-popover-input"
+                readOnly
+                value={window.location.href}
+                onClick={(e) => e.target.select()}
+              />
+              <button
+                className={`share-copy-btn ${copied ? "copied" : ""}`}
+                onClick={handleCopyLink}
+              >
+                {copied ? <Check size={14} /> : <Copy size={14} />}
+                {copied ? "Copied" : "Copy"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {showDeleteConfirm && (
+        <div className="confirm-overlay" onClick={() => setShowDeleteConfirm(false)}>
+          <div className="confirm-modal" onClick={(e) => e.stopPropagation()}>
+            <p className="confirm-modal-text">
+              Are you sure you want to delete this recipe?
+            </p>
+            <div className="confirm-modal-actions">
+              <button className="confirm-btn-no" onClick={() => setShowDeleteConfirm(false)}>
+                  No
+              </button>
+              <button className="confirm-btn-yes" onClick={confirmDelete}>
+                  Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -235,23 +235,24 @@
   color: var(--color-text);
 }
 
-.share-popover-wrapper {
-  position: relative;
+.share-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
 }
-
 .share-popover {
-  position: absolute;
-  bottom: calc(100% + 0.5rem);
-  left: 0;
+  background: var(--color-surface);
+  border-radius: 0.875rem;
+  padding: 1.5rem;
   width: 28rem;
   max-width: calc(100vw - 2rem);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 0.875rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  padding: 1.25rem;
-  z-index: 50;
+  box-shadow: 0 20px 40px rgba(128, 122, 122, 0.2);
 }
+
 
 .share-popover-header {
   display: flex;
@@ -264,12 +265,11 @@
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--color-text);
-  margin-bottom: 0;
 }
 
 .share-popover-close {
   display: flex;
-  align-items: right;
+  align-items: center;
   justify-content: right;
   height: 1.75rem;
   width: 1.75rem;
@@ -295,7 +295,6 @@
 .share-popover-input {
   flex: 1;
   min-width: 0;
-  max-width: 20rem;
   border: 1px solid var(--color-border);
   border-radius: 9999px;
   padding: 0.75rem 1.125rem;
@@ -306,7 +305,7 @@
   text-overflow: ellipsis;
 }
 
-.share-popover-row .share-copy-btn {
+.share-copy-btn {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -330,4 +329,87 @@
 .share-copy-btn.copied {
   background: #16a34a;
   color: white;
+}
+
+/* Delete button */
+.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.delete-btn:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+/* Confirm modal */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.confirm-modal {
+  background: var(--color-surface);
+  border-radius: 0.875rem;
+  padding: 1.5rem;
+  width: 24rem;
+  max-width: calc(100vw - 2rem);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-modal-text {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.625rem;
+}
+
+.confirm-btn-no {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.confirm-btn-no:hover {
+  background: var(--color-bg);
+}
+
+.confirm-btn-yes {
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm-btn-yes:hover {
+  background: #dc2626;
 }
