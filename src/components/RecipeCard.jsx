@@ -53,9 +53,10 @@ export default function RecipeCard({ recipe }) {
               <Flame size={16} />
               <span>Easy</span>
             </div>
-            <div
-              className="flex items-center gap-1.5 hover:text-destructive"
+            <button
+              className="flex items-center gap-1.5 hover:text-destructive cursor-pointer"
               onClick={handleFavoriteClick}
+              type="button"
             >
               <Heart
                 className={
@@ -66,7 +67,7 @@ export default function RecipeCard({ recipe }) {
                 size={16}
               />
               <span>{isFavorite(recipe.id) ? 1 : 0}</span>
-            </div>
+            </button>
           </div>
         </CardContent>
       </Card>
