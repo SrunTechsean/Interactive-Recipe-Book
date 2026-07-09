@@ -39,7 +39,7 @@ function AddRecipeForm() {
 	};
 
 	return (
-		<section className="w-full max-w-5xl mx-auto space-y-6">
+		<section className="w-full max-w-5xl mx-auto space-y-6 px-8 py-4">
 			<div>
 				<h1 className="text-3xl my-0 font-bold tracking-tight">
 					Add New Recipe
