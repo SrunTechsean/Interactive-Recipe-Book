@@ -199,7 +199,7 @@ export default function RecipeCarousel({ recipes = [] }) {
 
         {/* Dots */}
         <div className="mt-3 md:mt-6 flex justify-center gap-2">
-          {recipes.map((_, i) => (
+          {recipes.map((recipe, i) => (
             <button
               aria-label={`Go to slide ${i + 1}`}
               className={`h-1 sm:h-1.5 md:h-2 rounded-full transition-all duration-300 ${
@@ -207,7 +207,7 @@ export default function RecipeCarousel({ recipes = [] }) {
                   ? "w-3 sm:w-4.5 md:w-6 bg-white"
                   : "w-1 sm:w-1.5 md:w-2 bg-white/40 hover:bg-white/60"
               }`}
-              key={i}
+              key={`${recipe.id}-dot-${i}`}
               onClick={() => goTo(i)}
               type="button"
             />
