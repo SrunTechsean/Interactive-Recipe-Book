@@ -18,9 +18,9 @@ export default function CarouselCard({ recipe, state }) {
 
   return (
     <div
-      className={`relative w-full aspect-[3/2] transition-all duration-500 ease-out ${classes[state]}`}
+      className={`relative w-full aspect-[16/9] transition-all duration-500 ease-out ${classes[state]}`}
     >
-      <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden shadow-2xl bg-gray-900">
+      <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl bg-gray-900">
         <img
           alt={recipe.title}
           className="w-full h-full object-cover"
