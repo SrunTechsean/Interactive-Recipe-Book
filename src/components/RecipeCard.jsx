@@ -6,13 +6,15 @@ import { Card, CardContent } from "../components/ui/card";
 import { useFavorites } from "../contexts/FavoritesContext";
 
 export default function RecipeCard({ recipe }) {
-  const totalTime = recipe.prepTime + recipe.cookTime;
   const { toggleFavorite, isFavorite } = useFavorites();
   const handleFavoriteClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
     toggleFavorite(recipe.id);
   };
+
+  if (!recipe) return null;
+  const totalTime = recipe.prepTime + recipe.cookTime;
 
   return (
     <Link className="block group" to={`/recipes/${recipe.id}`}>
