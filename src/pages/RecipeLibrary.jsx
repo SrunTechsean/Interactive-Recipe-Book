@@ -5,6 +5,7 @@ import { useFilters } from "../contexts/FilterContext";
 import { seedRecipes } from "../data/seedData";
 import { storage } from "../lib/storage";
 
+
 export default function RecipeLibrary() {
   const { searchQuery } = useFilters();
   storage.setRecipes(seedRecipes);

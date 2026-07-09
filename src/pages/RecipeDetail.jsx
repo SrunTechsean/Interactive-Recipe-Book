@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ChefHat, Clock, Heart, Share2, Users, ArrowLeft } from "lucide-react";
+import { Clock, Heart, Share2, Users, ArrowLeft, Check, X, Copy } from "lucide-react";
 import { Button } from "../components/ui/button";
 import RecipeImage from "../components/RecipeImage";
 import { useFavorites } from "../contexts/FavoritesContext";
-import { seedRecipes } from "../data/seedData";
-import { storage } from "../lib/storage";
+import { useRecipes } from "../contexts/RecipeContext";
 import "./RecipeDetail.css";
 
 const TAG_CLASSES = {
@@ -19,9 +18,18 @@ export default function RecipeDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toggleFavorite, isFavorite } = useFavorites();
-  const [isCooking, setIsCooking] = useState(false);
+  const { getRecipeById } = useRecipes();
+  const [showShare, setShowShare] = useState(false);
+  const [copied, setCopied] = useState(false);
+  
 
-  const recipe = (storage.getRecipes() ?? seedRecipes).find((r) => r.id === id);
+  const recipe = getRecipeById(id);
+  
+  const handleCopyLink = async () => {
+    await navigator.clipboard?.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   if (!recipe) {
     return (
@@ -41,9 +49,9 @@ export default function RecipeDetail() {
       <h1 className = "recipe-page-tittle"><b>Recipe Detail</b></h1>
       <div className="recipe-breadcrumb">
         <Link to="/recipes">Library</Link>
-        <span>›</span>
-        <Link to {...`/recipes?category=${encodeURIComponent(recipe.category)}`}>
-        {recipe.category}
+          <span>›</span>
+            <Link to={`/recipes?category=${encodeURIComponent(recipe.category)}`}>
+            {recipe.category}
         </Link>
         <span>›</span>
         <span className="recipe-breadcrumb-current">{recipe.title}</span>
@@ -64,10 +72,33 @@ export default function RecipeDetail() {
               <Heart className={`icon-sm ${isFavorite(recipe.id) ? "icon-favorited" : ""}`} />
               Favorite
             </Button>
-            <Button onClick={() => navigator.clipboard?.writeText(window.location.href)} variant="outline">
-              <Share2 className="icon-sm" />
-              Share
-            </Button>
+
+            <div className = "share-popover-wrapper">
+              <Button onClick={() => setShowShare((prev) => !prev)} variant="outline">
+                <Share2 className="icon-sm" />
+                Share
+              </Button>
+
+              {showShare && (
+                <div className="share-popover">
+                  <div className="share-popover-header">
+                    <p className="share-popover-title">Share</p>
+                    <button className="share-popover-close" onClick={() => setShowShare(false)}>
+                      <X size={16} />
+                    </button>
+                  </div>
+
+                <div className="share-popover-row">
+                  <input className="share-popover-input" readOnly value={window.location.href} onClick={(e) => e.target.select()} />
+
+                  <button className={`share-copy-btn ${copied ? "copied" : ""}`} onClick={handleCopyLink}>
+                    {copied ? <Check size={14} /> : <Copy size={14} />}
+                    {copied ? "Copied" : "Copy"}
+                  </button>
+                </div>
+              </div>  
+              )}
+            </div>
           </div>
         </div>
 
