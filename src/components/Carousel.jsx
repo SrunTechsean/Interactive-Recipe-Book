@@ -137,7 +137,7 @@ export default function RecipeCarousel({ recipes = [] }) {
       {/* Content */}
       <div className="relative z-10 py-3 sm:py-4.5 md:py-6">
         <div
-          className="relative sm:px-6 md:px-12"
+          className="relative md:px-12"
           onTouchEnd={onTouchEnd}
           onTouchStart={onTouchStart}
         >
