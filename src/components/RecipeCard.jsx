@@ -1,5 +1,6 @@
 import { Clock, Flame, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import RecipeImage from "../components/RecipeImage";
 import { Badge } from "../components/ui/badge";
 import { Card, CardContent } from "../components/ui/card";
 import { useFavorites } from "../contexts/FavoritesContext";
@@ -19,10 +20,10 @@ export default function RecipeCard({ recipe }) {
         {/* Image of the food */}
         <div className="relative aspect-[4/2] bg-brand-bg">
           {recipe.imageId ? (
-            <img
+            <RecipeImage
               alt={recipe.title}
               className="h-full w-full object-cover"
-              src={recipe.imageId}
+              imageId={recipe.imageId}
             />
           ) : (
             <div className="flex h-full items-center justify-center text-brand-text-muted">
@@ -52,8 +53,18 @@ export default function RecipeCard({ recipe }) {
               <Flame size={16} />
               <span>Easy</span>
             </div>
-            <div className="flex items-center gap-1.5 hover:text-destructive" onClick={handleFavoriteClick}>
-              <Heart size={16} className={isFavorite(recipe.id) ? "fill-destructive text-destructive" : ""} />
+            <div
+              className="flex items-center gap-1.5 hover:text-destructive"
+              onClick={handleFavoriteClick}
+            >
+              <Heart
+                className={
+                  isFavorite(recipe.id)
+                    ? "fill-destructive text-destructive"
+                    : ""
+                }
+                size={16}
+              />
               <span>{isFavorite(recipe.id) ? 1 : 0}</span>
             </div>
           </div>
