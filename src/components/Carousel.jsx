@@ -166,7 +166,7 @@ export default function RecipeCarousel({ recipes = [] }) {
                 return (
                   <div
                     className="px-2 md:px-3"
-                    key={recipe.id}
+                    key={`${recipe.id}-${i}`}
                     style={{ flex: `0 0 ${100 / visibleCount}%` }}
                   >
                     <CarouselCard recipe={recipe} state={state} />
