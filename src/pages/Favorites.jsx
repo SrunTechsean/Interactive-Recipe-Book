@@ -28,10 +28,10 @@ export default function Favorites() {
   }
 
   return (
-    <section className="grid gap-3">
+    <section className="grid gap-3 px-8 py-4">
       <div className="flex items-center gap-3">
         {/* <Heart className="h-6 w-6 fill-destructive text-destructive" /> */}
-        <h1 className="text-2xl font-bold">Your Favorites</h1>
+        <h2 className="text-xl font-bold">Your Favorites</h2>
       </div>
 
       <GridForCard data={favoriteRecipes} />

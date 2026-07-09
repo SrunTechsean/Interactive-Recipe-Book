@@ -12,7 +12,7 @@ export default function RecipeLibrary() {
   );
 
   return (
-    <section className="grid gap-3">
+    <section className="grid gap-3 px-8 py-4">
       <SearchBar />
       <CategoryChips />
       <GridForCard data={filteredData} />
