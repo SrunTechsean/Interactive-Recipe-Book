@@ -9,15 +9,7 @@ const popularRecipes = seedRecipes.filter((recipe) =>
 export default function Home() {
   return (
     <section>
-      <div className="popular-recipes">
-        <header>
-          <h1>
-            <b>Popular Recipes</b>
-          </h1>
-        </header>
-        <Carousel recipes={popularRecipes} />
-      </div>
+      <Carousel recipes={popularRecipes} />
     </section>
   );
 }
-
