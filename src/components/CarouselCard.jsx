@@ -30,12 +30,12 @@ export default function CarouselCard({ recipe, state }) {
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-        <Badge className="absolute right-3 top-3 bg-blue-600 text-white hover:bg-blue-700 text-xs">
+        <Badge className="absolute hidden sm:flex right-3 top-3 bg-blue-600 text-white hover:bg-blue-700 text-xs">
           {recipe.category}
         </Badge>
 
         <Button
-          className="absolute left-3 top-3 h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-white/30"
+          className="hidden sm:flex absolute left-3 top-3 h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-white/30"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -56,7 +56,7 @@ export default function CarouselCard({ recipe, state }) {
             <h3
               className={`font-bold text-white drop-shadow-lg line-clamp-1 transition-all duration-500 ${
                 isCenter
-                  ? "text-xs sm:text-md md:text-xl"
+                  ? "text-xs sm:text-lg md:text-xl"
                   : "text-xs sm:text-sm md:text-base"
               }`}
             >
