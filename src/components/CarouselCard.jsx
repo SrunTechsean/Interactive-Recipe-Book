@@ -52,11 +52,11 @@ export default function CarouselCard({ recipe, state }) {
         </Button>
 
         <Link className="block" to={`/recipes/${recipe.id}`}>
-          <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5">
+          <div className="absolute bottom-0 left-0 right-0 p-[clamp(0.8rem,-0.057rem+2.286vw,2rem)]">
             <h3
               className={`font-bold text-white drop-shadow-lg line-clamp-1 transition-all duration-500 ${
                 isCenter
-                  ? "text-lg sm:text-xl md:text-2xl"
+                  ? "text-xs sm:text-md md:text-xl"
                   : "text-xs sm:text-sm md:text-base"
               }`}
             >
