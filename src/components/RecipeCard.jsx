@@ -20,19 +20,18 @@ export default function RecipeCard({ recipe }) {
     <Link className="block group" to={`/recipes/${recipe.id}`}>
       <Card className="ring-0 pt-0 overflow-hidden border border-brand-border bg-white transition-shadow hover:shadow-lg">
         {/* Image of the food */}
-        <div className="relative aspect-[4/2] bg-brand-bg">
+        <div className="relative aspect-[4/2] bg-brand-bg overflow-hidden">
           {recipe.imageId ? (
             <RecipeImage
               alt={recipe.title}
-              className="h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
               imageId={recipe.imageId}
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-brand-text-muted">
+            <div className="absolute inset-0 flex items-center justify-center text-brand-text-muted">
               <span className="text-sm">No image</span>
             </div>
           )}
-
           {/* Category badge — top right */}
           <Badge className="absolute right-3 top-3 bg-primary-100 text-white hover:bg-primary-500">
             {recipe.category}
