@@ -15,13 +15,13 @@ import { seedDatabase } from "./lib/seedDB.js";
 await seedDatabase();
 
 createRoot(document.getElementById("root")).render(
-	<StrictMode>
-		<BrowserRouter>
-			<FilterProvider>
-				<FavoritesProvider>
-					<App />
-				</FavoritesProvider>
-			</FilterProvider>
-		</BrowserRouter>
-	</StrictMode>,
+  <StrictMode>
+    <BrowserRouter>
+      <FilterProvider>
+        <FavoritesProvider>
+          <App />
+        </FavoritesProvider>
+      </FilterProvider>
+    </BrowserRouter>
+  </StrictMode>,
 );

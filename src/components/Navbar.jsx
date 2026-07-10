@@ -1,64 +1,174 @@
+import { Book, Heart, Home, Menu, Plus, Search, X } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Home, Book, Plus, Heart, Search, User, ChevronDown, Menu, X } from "lucide-react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { useFilters } from "../contexts/FilterContext";
 
-const linkClass = ({ isActive }) =>
-  `flex items-center gap-2 font-medium pb-1 border-b-2 whitespace-nowrap ${
-    isActive
-      ? "text-red-600 border-red-600"
-      : "text-gray-600 border-transparent hover:text-red-600"
-  }`;
-
-// This is for minimize the screen
-const navItems = [
-  { title: "Home", path: "/" },
-  { title: "Recipes", path: "/recipes" },
-  { title: "Add Recipe", path: "/add" },
-  { title: "Favorites", path: "/favorites" },
-  { title: "Search", path: "/search" },
-  { title: "Sign In", path: "/signin" },
+const navLinks = [
+  { title: "Home", path: "/", icon: Home },
+  { title: "Recipes", path: "/recipes", icon: Book },
+  { title: "Favorites", path: "/favorites", icon: Heart },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const { searchQuery, setSearchQuery } = useFilters();
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate("/recipes");
+      setSearchOpen(false);
+      setMenuOpen(false);
+    }
+  };
+
   return (
-    <nav className="flex flex-col items-center gap-3 border-b bg-background px-6 py-3 sm:flex-row sm:justify-between sm:overflow-x-auto">
-      <div className="flex items-center gap-2 shrink-0">
-        <img src="/recipe-book-icon.svg" className="w-6 h-6" alt="RecipeBook logo" />
-        <span className="text-xl font-semibold text-gray-900 whitespace-nowrap">Recipe Book</span>
-      </div>
+    <nav className="sticky top-0 z-50 w-full bg-primary-500 shadow-lg shadow-primary-500/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between gap-4">
+          {/* Logo */}
+          <NavLink className="flex items-center gap-2.5 shrink-0 group" to="/">
+            <span className="text-xl font-bold text-white tracking-tight hidden sm:block">
+              Recipe Book
+            </span>
+          </NavLink>
 
-      <div className="flex flex-wrap items-center justify-center gap-4 sm:flex-nowrap sm:gap-6 sm:shrink-0">
-        <NavLink to="/" end className={linkClass}>
-          <Home className="w-4 h-4" /> 
-          Home
-        </NavLink>
-
-        <NavLink to="/recipes" className={linkClass}>
-          <Book className="w-4 h-4" /> 
-          Recipes
-        </NavLink>
-
-        <NavLink
-          to="/add"
-          className="flex items-center gap-2 bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 whitespace-nowrap"
-        >
-          <Plus className="w-4 h-4" /> 
-          Add Recipe
-        </NavLink>
-
-        <NavLink to="/favorites" className={linkClass}>
-          <Heart className="w-4 h-4" />
-          Favorites
-        </NavLink>
-
-        <Search className="w-5 h-5 text-gray-500 hover:text-gray-900 cursor-pointer" />
-        <div className="flex items-center gap-1 cursor-pointer">
-          <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-            <User className="w-4 h-4 text-gray-600" />
+          {/* Desktop Nav Links */}
+          <div className="hidden tablet:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <NavLink
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                      isActive
+                        ? "bg-white/20 text-white shadow-sm"
+                        : "text-white hover:text-white hover:bg-white/10"
+                    }`
+                  }
+                  end={link.path === "/"}
+                  key={link.path}
+                  to={link.path}
+                >
+                  <Icon className="h-4 w-4" />
+                  {link.title}
+                </NavLink>
+              );
+            })}
           </div>
-          <ChevronDown className="w-4 h-4 text-gray-500" />
+
+          {/* Desktop Search + Add Recipe */}
+          <div className="hidden tablet:flex items-center gap-3">
+            <form className="relative" onSubmit={handleSearch}>
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-text-muted" />
+              <Input
+                className="h-10 w-44 pl-9 text-sm bg-white/95 border-0 text-brand-text placeholder:text-brand-text-muted rounded-xl shadow-sm focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0 transition-all hover:bg-white"
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
+                type="text"
+                value={searchQuery}
+              />
+            </form>
+
+            <Button
+              asChild
+              className="h-10 px-5 bg-white text-primary-600 hover:bg-white/20 hover:text-brand-surface transition-colors duration-300 ease-in-out  font-semibold rounded-xl shadow-md shadow-black/10 gap-2 text-sm"
+            >
+              <NavLink to="/add">
+                <Plus className="h-4 w-4" />
+                Add Recipe
+              </NavLink>
+            </Button>
+          </div>
+
+          {/* Mobile Controls */}
+          <div className="flex items-center gap-2 tablet:hidden">
+            <button
+              className="p-2.5 rounded-xl text-white hover:text-white hover:bg-white/10 transition-colors"
+              onClick={() => setSearchOpen(!searchOpen)}
+              type="button"
+            >
+              {searchOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Search className="h-5 w-5" />
+              )}
+            </button>
+
+            <button
+              className="p-2.5 rounded-xl text-white hover:text-white hover:bg-white/10 transition-colors"
+              onClick={() => setMenuOpen(!menuOpen)}
+              type="button"
+            >
+              {menuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Search */}
+        {searchOpen && (
+          <div className="tablet:hidden pb-3 border-t border-white/10 pt-3">
+            <form className="relative" onSubmit={handleSearch}>
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-500/60" />
+              <Input
+                autoFocus
+                className="w-full h-10 pl-9 bg-white/95 border-0 text-primary-600 placeholder:text-primary-500/50 rounded-xl focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0"
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search recipes..."
+                type="text"
+                value={searchQuery}
+              />
+            </form>
+          </div>
+        )}
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="tablet:hidden pb-4 border-t border-white/10 pt-3 space-y-1">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <NavLink
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-colors ${
+                      isActive
+                        ? "bg-white/20 text-white"
+                        : "text-white/80 hover:text-white hover:bg-white/10"
+                    }`
+                  }
+                  end={link.path === "/"}
+                  key={link.path}
+                  onClick={() => setMenuOpen(false)}
+                  to={link.path}
+                >
+                  <Icon className="h-4 w-4" />
+                  {link.title}
+                </NavLink>
+              );
+            })}
+
+            <div className="pt-2 px-3">
+              <Button
+                asChild
+                className="w-full h-11 bg-white text-primary-600 hover:bg-primary-600 hover:text-brand-surface transition-colors duration-300 ease-in-out font-semibold rounded-xl gap-2"
+                onClick={() => setMenuOpen(false)}
+              >
+                <NavLink to="add">
+                  <Plus className="h-4 w-4" />
+                  Add Recipe
+                </NavLink>
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
