@@ -1,32 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getImage } from "../lib/imageDB";
 
-export default function RecipeImage({ imageId, alt, className }) {
-	const [imageUrl, setImageUrl] = useState(null);
+export default function RecipeImage({ imageId, alt, className, fallbackSrc }) {
+  const [imageUrl, setImageUrl] = useState(null);
+  const objectUrlRef = useRef(null);
 
-	useEffect(() => {
-		if (!imageId) {
-			setImageUrl(null);
-			return;
-		}
+  useEffect(() => {
+    // Revoke previous blob immediately
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+      objectUrlRef.current = null;
+    }
 
-		let objectUrl;
-		let cancelled = false;
+    if (!imageId) {
+      setImageUrl(null);
+      return;
+    }
 
-		getImage(imageId).then((file) => {
-			if (file && !cancelled) {
-				objectUrl = URL.createObjectURL(file);
-				setImageUrl(objectUrl);
-			}
-		});
+    let cancelled = false;
 
-		return () => {
-			cancelled = true;
-			if (objectUrl) URL.revokeObjectURL(objectUrl);
-		};
-	}, [imageId]);
+    getImage(imageId)
+      .then((file) => {
+        if (cancelled) return;
+        if (!file) {
+          setImageUrl(null);
+          return;
+        }
+        const objectUrl = URL.createObjectURL(file);
+        objectUrlRef.current = objectUrl;
+        setImageUrl(objectUrl);
+      })
+      .catch(() => {
+        if (!cancelled) setImageUrl(null);
+      });
 
-	if (!imageUrl) return null;
+    return () => {
+      cancelled = true;
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+        objectUrlRef.current = null;
+      }
+    };
+  }, [imageId]);
 
-	return <img src={imageUrl} alt={alt} className={className} />;
+  const src = imageUrl || fallbackSrc;
+  if (!src) return null;
+
+  return <img alt={alt} className={className} src={src} />;
 }

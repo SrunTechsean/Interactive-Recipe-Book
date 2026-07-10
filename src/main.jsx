@@ -9,13 +9,10 @@ import "./styles/tokens.css";
 import FavoritesProvider from "./contexts/FavoritesContext";
 import FilterProvider from "./contexts/FilterContext";
 
-import { seedRecipes } from "./data/seedData";
-import { storage } from "./lib/storage";
+import { seedDatabase } from "./lib/seedDB.js";
 
-// Store seedRecipes once into localStorage
-if (!storage.getRecipes()) {
-  storage.setRecipes(seedRecipes);
-}
+// Store seedRecipes and images once into localStorage & indexedDB
+await seedDatabase();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

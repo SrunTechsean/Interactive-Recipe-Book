@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { Button } from "../components/ui/button";
 import CarouselCard from "./CarouselCard";
+import RecipeImage from "./RecipeImage";
 
 const FALLBACK_BG = "/carousel-background.jpg";
 
@@ -43,7 +44,6 @@ export default function RecipeCarousel({ recipes = [] }) {
   const centerRecipe = useMemo(() => {
     return slides[centerIndex] ?? null;
   }, [slides, centerIndex]);
-  const bgImage = centerRecipe?.imageId || FALLBACK_BG;
 
   const translatePercent = (index - half) * (100 / visibleCount);
 
@@ -122,16 +122,14 @@ export default function RecipeCarousel({ recipes = [] }) {
   return (
     <section className="relative w-full overflow-hidden select-none">
       {/* Dynamic background */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out"
-          style={{
-            backgroundImage: `url(${bgImage})`,
-            transform: "scale(1.2)",
-            filter: "blur(24px) brightness(0.3)",
-          }}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <RecipeImage
+          alt="background"
+          className="h-full w-full object-cover scale-125 blur-lg brightness-[0.3]"
+          fallbackSrc={FALLBACK_BG}
+          imageId={centerRecipe?.imageId}
         />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/20" />
       </div>
 
       {/* Content */}
@@ -168,7 +166,7 @@ export default function RecipeCarousel({ recipes = [] }) {
                 return (
                   <div
                     className="px-2 md:px-3"
-                    key={recipe.id}
+                    key={`${recipe.id}-${i}`}
                     style={{ flex: `0 0 ${100 / visibleCount}%` }}
                   >
                     <CarouselCard recipe={recipe} state={state} />
