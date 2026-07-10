@@ -33,7 +33,7 @@ export default function RecipeCard({ recipe }) {
             </div>
           )}
           {/* Category badge — top right */}
-          <Badge className="absolute right-3 top-3 bg-primary-100 text-white hover:bg-primary-500">
+          <Badge className="absolute right-3 top-3 bg-primary-500 text-white hover:bg-primary-600">
             {recipe.category}
           </Badge>
         </div>
