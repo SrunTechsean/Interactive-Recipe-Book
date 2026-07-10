@@ -7,8 +7,10 @@ import {
   Trash2,
   Users,
 } from "lucide-react";
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import RecipeImage from "../components/RecipeImage";
+import ShareModal from "../components/ShareModal";
 import { Button } from "../components/ui/button";
 import { useFavorites } from "../contexts/FavoritesContext";
 import { seedRecipes } from "../data/seedData";
@@ -27,6 +29,7 @@ export default function RecipeDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toggleFavorite, isFavorite } = useFavorites();
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const recipe = (storage.getRecipes() ?? seedRecipes).find((r) => r.id === id);
 
@@ -66,6 +69,12 @@ export default function RecipeDetail() {
 
   return (
     <div className="recipe-detail py-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ShareModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        url={typeof window !== "undefined" ? window.location.href : ""}
+      />
+
       <button
         className="recipe-back-btn"
         onClick={() => navigate(-1)}
@@ -108,12 +117,7 @@ export default function RecipeDetail() {
               Favorite
             </Button>
 
-            <Button
-              onClick={() =>
-                navigator.clipboard?.writeText(window.location.href)
-              }
-              variant="outline"
-            >
+            <Button onClick={() => setShowShareModal(true)} variant="outline">
               <Share2 className="icon-sm" />
               Share
             </Button>
@@ -179,7 +183,7 @@ export default function RecipeDetail() {
         </div>
       </div>
 
-      {/* EDIT & DELETE BUTTONS */}
+      {/* Edit and Delete Btn */}
       <div className="recipe-bottom-actions">
         <Button
           asChild
