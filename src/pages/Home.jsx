@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <section>
       <Carousel recipes={popularRecipes} />
-      <div className="px-8 py-4">
+      <div className="py-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-xl font-semibold pb-4">Our Recipe</h2>
         <GridForCard data={data} />
       </div>

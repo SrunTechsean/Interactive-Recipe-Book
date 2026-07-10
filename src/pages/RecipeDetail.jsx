@@ -31,7 +31,7 @@ export default function RecipeDetail() {
   }
 
   return (
-    <div className="recipe-detail">
+    <div className="recipe-detail py-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <button
         className="recipe-back-btn"
         onClick={() => navigate(-1)}

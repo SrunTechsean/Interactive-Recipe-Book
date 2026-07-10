@@ -28,7 +28,7 @@ export default function Favorites() {
   }
 
   return (
-    <section className="grid gap-3 px-8 py-4">
+    <section className="grid gap-3 py-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-3">
         {/* <Heart className="h-6 w-6 fill-destructive text-destructive" /> */}
         <h2 className="text-xl font-bold">Your Favorites</h2>
