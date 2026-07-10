@@ -1,9 +1,18 @@
-import { ArrowLeft, Clock, Heart, Share2, Users } from "lucide-react";
+import {
+  ArrowLeft,
+  Clock,
+  Heart,
+  Pencil,
+  Share2,
+  Trash2,
+  Users,
+} from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import RecipeImage from "../components/RecipeImage";
 import { Button } from "../components/ui/button";
 import { useFavorites } from "../contexts/FavoritesContext";
 import { seedRecipes } from "../data/seedData";
+import { deleteImage } from "../lib/imageDB";
 import { storage } from "../lib/storage";
 import "./RecipeDetail.css";
 
@@ -30,6 +39,31 @@ export default function RecipeDetail() {
     );
   }
 
+  const handleDelete = async () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${recipe.title}"? This cannot be undone.`,
+    );
+    if (!confirmed) return;
+
+    const recipes = storage.getRecipes() ?? seedRecipes;
+    const updatedRecipes = recipes.filter((r) => r.id !== id);
+    storage.setRecipes(updatedRecipes);
+
+    if (recipe.imageId) {
+      try {
+        await deleteImage(recipe.imageId);
+      } catch (err) {
+        console.error("Failed to delete image from IndexedDB:", err);
+      }
+    }
+
+    const favorites = storage.getFavorites();
+    const updatedFavorites = favorites.filter((fid) => fid !== id);
+    storage.setFavorites(updatedFavorites);
+
+    navigate("/recipes", { replace: true });
+  };
+
   return (
     <div className="recipe-detail py-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <button
@@ -40,16 +74,15 @@ export default function RecipeDetail() {
         <ArrowLeft size={16} />
         Back
       </button>
+
       <h1 className="recipe-page-tittle">
         <b>Recipe Detail</b>
       </h1>
+
       <div className="recipe-breadcrumb">
         <Link to="/recipes">Library</Link>
         <span>›</span>
-        <Link
-          to
-          {...`/recipes?category=${encodeURIComponent(recipe.category)}`}
-        >
+        <Link to={`/recipes?category=${encodeURIComponent(recipe.category)}`}>
           {recipe.category}
         </Link>
         <span>›</span>
@@ -57,6 +90,7 @@ export default function RecipeDetail() {
       </div>
 
       <div className="recipe-grid">
+        {/* Left Column */}
         <div>
           <div className="recipe-image-wrapper">
             {recipe.imageId ? (
@@ -73,6 +107,7 @@ export default function RecipeDetail() {
               />
               Favorite
             </Button>
+
             <Button
               onClick={() =>
                 navigator.clipboard?.writeText(window.location.href)
@@ -85,6 +120,7 @@ export default function RecipeDetail() {
           </div>
         </div>
 
+        {/* Right Column */}
         <div>
           <h1 className="recipe-title">{recipe.title}</h1>
 
@@ -141,6 +177,27 @@ export default function RecipeDetail() {
             ))}
           </ol>
         </div>
+      </div>
+
+      {/* EDIT & DELETE BUTTONS */}
+      <div className="recipe-bottom-actions">
+        <Button
+          asChild
+          className="recipe-edit-btn bg-primary-500 text-brand-surface hover:bg-brand-surface hover:text-primary-500 hover:border-primary-500 border-2 transition-colors duration-300 ease-in-out"
+        >
+          <Link to={`/add?editId=${id}`}>
+            <Pencil className="icon-sm" />
+            Edit
+          </Link>
+        </Button>
+
+        <Button
+          className="recipe-delete-btn bg-destructive text-brand-surface hover:bg-brand-surface hover:text-destructive hover:border-destructive border-2 transition-colors duration-300 ease-in-out"
+          onClick={handleDelete}
+        >
+          <Trash2 className="icon-sm" />
+          Delete
+        </Button>
       </div>
     </div>
   );
