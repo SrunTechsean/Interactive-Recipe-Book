@@ -15,4 +15,5 @@
   --color-brand-text: #0f172a;
   --color-brand-text-muted: #64748b;
   --color-destructive: #ef4444;
+  --breakpoint-tablet: 900px;
 }
