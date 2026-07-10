@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRecipeForm } from "../../contexts/AddRecipeContext";
 import { Button } from "../ui/button";
 
-export default function RecipeUpload({ onSave }) {
+export default function RecipeUpload({ onSave, onCancel }) {
   const { instructions, setInstructions, image, setImage, errors } =
     useRecipeForm();
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -126,6 +126,7 @@ export default function RecipeUpload({ onSave }) {
       <div className="flex justify-between items-center pt-4 gap-4">
         <Button
           className="category__chip flex-1"
+          onClick={onCancel}
           type="button"
           variant="outline"
         >

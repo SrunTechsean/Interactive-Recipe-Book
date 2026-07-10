@@ -52,6 +52,14 @@ function AddRecipeForm({ editId, existingRecipe }) {
     navigate("/recipes");
   };
 
+  const handleCancel = () => {
+    if (isEditing) {
+      navigate(`/recipes/${editId}`);
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
     <section className="w-full space-y-6 py-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div>
@@ -66,7 +74,7 @@ function AddRecipeForm({ editId, existingRecipe }) {
         <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
           <RecipeDes />
           <RecipeTable />
-          <RecipeUpload onSave={handleSave} />
+          <RecipeUpload onCancel={handleCancel} onSave={handleSave} />
         </form>
         {showModal && !isEditing && (
           <SaveConfirmModal
