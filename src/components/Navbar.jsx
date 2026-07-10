@@ -38,7 +38,7 @@ export default function Navbar() {
           </NavLink>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden tablet:flex items-center gap-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -62,7 +62,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Search + Add Recipe */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden tablet:flex items-center gap-3">
             <form className="relative" onSubmit={handleSearch}>
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-text-muted" />
               <Input
@@ -86,7 +86,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Controls */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 tablet:hidden">
             <button
               className="p-2.5 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-colors"
               onClick={() => setSearchOpen(!searchOpen)}
@@ -115,7 +115,7 @@ export default function Navbar() {
 
         {/* Mobile Search */}
         {searchOpen && (
-          <div className="md:hidden pb-3 border-t border-white/10 pt-3">
+          <div className="tablet:hidden pb-3 border-t border-white/10 pt-3">
             <form className="relative" onSubmit={handleSearch}>
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-500/60" />
               <Input
@@ -132,7 +132,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden pb-4 border-t border-white/10 pt-3 space-y-1">
+          <div className="tablet:hidden pb-4 border-t border-white/10 pt-3 space-y-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
               return (
