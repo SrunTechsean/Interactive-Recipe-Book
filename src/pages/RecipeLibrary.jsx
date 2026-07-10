@@ -3,12 +3,12 @@ import GridForCard from "../components/GridForCard";
 import SearchBar from "../components/SearchBar";
 import { useFilters } from "../contexts/FilterContext";
 import { seedRecipes } from "../data/seedData";
-import { storage } from "../lib/storage";
+import { useRecipes } from "../contexts/RecipeContext";
 
 
 export default function RecipeLibrary() {
   const { searchQuery } = useFilters();
-  storage.setRecipes(seedRecipes);
+  const { recipes } = useRecipes();
 
   const filteredData = seedRecipes.filter((recipe) =>
     recipe.title.toLowerCase().includes(searchQuery.toLowerCase()),
