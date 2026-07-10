@@ -46,10 +46,7 @@ export default function RecipeDetail() {
       <div className="recipe-breadcrumb">
         <Link to="/recipes">Library</Link>
         <span>›</span>
-        <Link
-          to
-          {...`/recipes?category=${encodeURIComponent(recipe.category)}`}
-        >
+        <Link to={`/recipes?category=${encodeURIComponent(recipe.category)}`}>
           {recipe.category}
         </Link>
         <span>›</span>
