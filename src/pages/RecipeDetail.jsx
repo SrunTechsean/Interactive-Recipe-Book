@@ -18,7 +18,7 @@ export default function RecipeDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toggleFavorite, isFavorite } = useFavorites();
-  const { getRecipeById } = useRecipes();
+  const { getRecipeById, deleteRecipe} = useRecipes();
   const [showShare, setShowShare] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -87,10 +87,6 @@ export default function RecipeDetail() {
               </Button>
 
             </div>
-            {/* Delete button */}
-            <button className="delete-btn" onClick={() => setShowDeleteConfirm(true)}>
-              <Trash2 size={16} />
-            </button>
           </div>
         </div>
 
@@ -134,6 +130,10 @@ export default function RecipeDetail() {
               </li>
             ))}
           </ol>
+            {/* Delete button */}
+            <button className="delete-btn" onClick={() => setShowDeleteConfirm(true)}>
+              <Trash2 size={16} />
+            </button>
         </div>
       </div>
       {showShare && (

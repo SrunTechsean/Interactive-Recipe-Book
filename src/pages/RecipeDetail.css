@@ -344,6 +344,13 @@
   color: var(--color-text-muted);
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+ 
+  /* Pin to bottom-right of the viewport */
+  position: fixed;
+  bottom: clamp(1.5rem, 5vh, 4rem);
+  right: clamp(1.5rem, 5vw, 4rem);
+  z-index: 50;
 }
 
 .delete-btn:hover {
