@@ -76,7 +76,7 @@ export default function Navbar() {
 
             <Button
               asChild
-              className="h-10 px-5 bg-white text-primary-600 hover:bg-primary-600 hover:text-brand-surface transition-colors duration-300 ease-in-out  font-semibold rounded-xl shadow-md shadow-black/10 gap-2 text-sm"
+              className="h-10 px-5 bg-white text-primary-600 hover:bg-white/20 hover:text-brand-surface transition-colors duration-300 ease-in-out  font-semibold rounded-xl shadow-md shadow-black/10 gap-2 text-sm"
             >
               <NavLink to="/add">
                 <Plus className="h-4 w-4" />
@@ -88,7 +88,7 @@ export default function Navbar() {
           {/* Mobile Controls */}
           <div className="flex items-center gap-2 tablet:hidden">
             <button
-              className="p-2.5 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-2.5 rounded-xl text-white hover:text-white hover:bg-white/10 transition-colors"
               onClick={() => setSearchOpen(!searchOpen)}
               type="button"
             >
@@ -100,7 +100,7 @@ export default function Navbar() {
             </button>
 
             <button
-              className="p-2.5 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-2.5 rounded-xl text-white hover:text-white hover:bg-white/10 transition-colors"
               onClick={() => setMenuOpen(!menuOpen)}
               type="button"
             >
