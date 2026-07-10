@@ -75,10 +75,21 @@ Interactive-Recipe-Book/
 └── README.md
 ```
 ## Getting Started:
-```
-# Install dependencies
-npm install
+1. Clone the repository:
 
-# Start the dev server
-npm run dev
-```
+   ```
+   git clone https://github.com/SrunTechsean/Interactive-Recipe-Book.git
+   cd Interactive-Recipe-Book
+   ```
+
+2. Install dependencies:
+
+   ```
+   npm install
+   ```
+
+3. Start the dev server:
+
+   ```
+   npm run dev
+   ```
