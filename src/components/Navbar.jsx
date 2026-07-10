@@ -117,10 +117,10 @@ export default function Navbar() {
         {searchOpen && (
           <div className="tablet:hidden pb-3 border-t border-white/10 pt-3">
             <form className="relative" onSubmit={handleSearch}>
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-500/60" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-text-muted" />
               <Input
                 autoFocus
-                className="w-full h-10 pl-9 bg-white/95 border-0 text-primary-600 placeholder:text-primary-500/50 rounded-xl focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0"
+                className="w-full h-10 pl-9 bg-white/95 border-0 text-brand-text placeholder:text-brand-text-muted rounded-xl focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0"
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search recipes..."
                 type="text"
