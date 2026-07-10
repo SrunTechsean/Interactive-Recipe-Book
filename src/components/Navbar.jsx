@@ -32,7 +32,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
           <NavLink className="flex items-center gap-2.5 shrink-0 group" to="/">
-            <span className="text-xl font-bold text-white tracking-tight hidden sm:block">
+            <span className="text-xl font-bold text-white tracking-tight">
               Recipe Book
             </span>
           </NavLink>
