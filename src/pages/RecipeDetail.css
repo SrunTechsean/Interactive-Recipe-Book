@@ -247,3 +247,26 @@
   padding-top: 0.125rem;
   color: var(--color-text);
 }
+
+.recipe-bottom-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 24px;
+  margin-top: 32px;
+}
+
+.recipe-edit-btn {
+  flex: 1;
+  gap: 8px;
+  justify-content: center;
+  height: 44px;
+  font-weight: 500;
+}
+
+.recipe-delete-btn {
+  flex: 1;
+  gap: 8px;
+  justify-content: center;
+  height: 44px;
+  font-weight: 500;
+}
