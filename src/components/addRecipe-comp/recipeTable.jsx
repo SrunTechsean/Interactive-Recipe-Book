@@ -1,6 +1,7 @@
 import { Trash2 } from "lucide-react";
 import { useRecipeForm } from "../../contexts/AddRecipeContext";
 import { Button } from "../ui/button";
+import "../CategoryChips.css"
 
 const DIETARY_TAGS = [
 	"Vegan",
